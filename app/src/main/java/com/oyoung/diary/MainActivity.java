@@ -9,8 +9,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.oyoung.diary.utils.ActivityUtils;
 import com.oyoung.diary.view.DiariesFragment;
+import com.oyoung.diary.view.MeFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,6 +22,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initToolbar();
         initFragment();
+        initNavigationBottom();
+    }
+
+    private void initNavigationBottom() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation_bottom);
+        bottomNavigationView.setOnNavigationItemSelectedListener(itemSelectedListener);
     }
 
     @Override
@@ -43,4 +51,18 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = item -> {
+        switch (item.getItemId()) {
+            case R.id.menu_diary:
+                ActivityUtils.removeFragmentTOActivity(getSupportFragmentManager(), getSupportFragmentManager().findFragmentById(R.id.content));
+                ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), new DiariesFragment(), R.id.content);
+                break;
+            case R.id.menu_me:
+                ActivityUtils.removeFragmentTOActivity(getSupportFragmentManager(), getSupportFragmentManager().findFragmentById(R.id.content));
+                ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), new MeFragment(), R.id.content);
+                break;
+        }
+        return true;
+    };
 }

@@ -16,4 +16,10 @@ public class ActivityUtils {
         transaction.add(fragmentId, fragment);
         transaction.commit();
     }
+
+    public static void removeFragmentTOActivity(FragmentManager manager, Fragment fragment) {
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.remove(fragment);
+        transaction.commit();
+    }
 }

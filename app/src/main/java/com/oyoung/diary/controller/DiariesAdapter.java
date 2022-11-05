@@ -37,14 +37,11 @@ public class DiariesAdapter extends RecyclerView.Adapter<DiaryHolder> {
         final Diary diary = mDiaries.get(position);
         holder.onBindView(diary);
         holder.setOnLongClickListener(new View.OnLongClickListener() {
-
             @Override
             public boolean onLongClick(View view) {
                 return mOnLongClickListener != null && mOnLongClickListener.onLongClick(view, diary);
             }
         });
-
-
     }
 
     @Override

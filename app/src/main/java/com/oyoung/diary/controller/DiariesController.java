@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +20,8 @@ import com.oyoung.diary.R;
 import com.oyoung.diary.model.DataCallback;
 import com.oyoung.diary.model.DiariesRepository;
 import com.oyoung.diary.model.Diary;
+import com.oyoung.diary.utils.ActivityUtils;
+import com.oyoung.diary.view.AddDiaryFragment;
 import com.oyoung.diary.view.DiariesFragment;
 
 import java.util.ArrayList;
@@ -38,7 +41,6 @@ public class DiariesController {
     private void initAdapter() {
         mListAdapter = new DiariesAdapter(new ArrayList<Diary>());
         mListAdapter.setOnLongClickListener(new DiariesAdapter.OnLongClickListener<Diary>() {
-
             @Override
             public boolean onLongClick(View v, Diary data) {
                 showInputDialog(data);
@@ -85,8 +87,20 @@ public class DiariesController {
         });
     }
 
-    public void gotoWriteDiary() {
-        showMessage(mView.getString(R.string.developing));
+    public void gotoWriteDiary(FragmentManager fragmentManager, Fragment fragment) {
+        new AlertDialog.Builder(mView.getContext())
+                .setMessage(EnApplication.get().getString(R.string.alert))
+                .setPositiveButton(EnApplication.get().getString(R.string.ok),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                ActivityUtils.removeFragmentTOActivity(fragmentManager, fragment);
+                                ActivityUtils.addFragmentToActivity(fragmentManager, new AddDiaryFragment(), R.id.content);
+                            }
+                        })
+                .setNegativeButton(EnApplication.get().getString(R.string.cancel), null).show();
+
+//        showMessage(mView.getString(R.string.developing));
     }
 
     private void showError() {

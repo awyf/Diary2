@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_add"
-        android:title="@string/menu_write"
-        android:icon="@drawable/ic_diaries_add"
+        android:id="@+id/menu_cancel"
+        android:title="@string/menu_cancel"
+        android:icon="@drawable/ic_diaries_cancel"
         app:showAsAction="always"/>
 </menu>

@@ -33,7 +33,7 @@ public class DiariesFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_add:
-                mController.gotoWriteDiary();
+                mController.gotoWriteDiary(getActivity().getSupportFragmentManager(), this);
                 return true;
         }
         return false;
@@ -43,7 +43,7 @@ public class DiariesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_diaries, container, false);
-        mController.setDiariesList((RecyclerView) root.findViewById(R.id.diaries_list));
+        mController.setDiariesList(root.findViewById(R.id.diaries_list));
         return root;
     }
 
