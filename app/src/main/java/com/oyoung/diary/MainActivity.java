@@ -3,18 +3,25 @@ package com.oyoung.diary;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.ViewCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.oyoung.diary.utils.ActivityUtils;
+import com.oyoung.diary.view.AddDiaryFragment;
 import com.oyoung.diary.view.DiariesFragment;
 import com.oyoung.diary.view.MeFragment;
 
 public class MainActivity extends AppCompatActivity {
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +32,10 @@ public class MainActivity extends AppCompatActivity {
         initNavigationBottom();
     }
 
+    @SuppressLint("ResourceAsColor")
     private void initNavigationBottom() {
-        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation_bottom);
+        bottomNavigationView = findViewById(R.id.navigation_bottom);
+        bottomNavigationView.setItemIconTintList(null);
         bottomNavigationView.setOnNavigationItemSelectedListener(itemSelectedListener);
     }
 
@@ -52,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = item -> {
+    private final BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = item -> {
         switch (item.getItemId()) {
             case R.id.menu_diary:
                 ActivityUtils.removeFragmentTOActivity(getSupportFragmentManager(), getSupportFragmentManager().findFragmentById(R.id.content));
@@ -61,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_me:
                 ActivityUtils.removeFragmentTOActivity(getSupportFragmentManager(), getSupportFragmentManager().findFragmentById(R.id.content));
                 ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), new MeFragment(), R.id.content);
+                break;
+            case R.id.menu_new:
+                bottomNavigationView.setVisibility(View.GONE);
+                ActivityUtils.removeFragmentTOActivity(getSupportFragmentManager(), getSupportFragmentManager().findFragmentById(R.id.content));
+                ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), new AddDiaryFragment(), R.id.content);
                 break;
         }
         return true;

@@ -49,6 +49,7 @@ public class AddDiaryFragment extends Fragment implements View.OnClickListener {
         switch (item.getItemId()) {
             case R.id.menu_cancel:
                 mController.closeWriteDiary(getActivity().getSupportFragmentManager(), this);
+                mController.setNavigationVisibility();
                 return true;
         }
         return false;
@@ -72,6 +73,7 @@ public class AddDiaryFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.add_diary_confirm:
                 mController.addDiaryToRepository(edit_title.getText().toString().trim(), edit_desc.getText().toString().trim());
+                mController.setNavigationVisibility();
                 mController.closeWriteDiary(getActivity().getSupportFragmentManager(), this);
                 break;
             case R.id.edit_layout:

@@ -13,6 +13,7 @@ import java.util.List;
 public class DiariesAdapter extends RecyclerView.Adapter<DiaryHolder> {
     private List<Diary> mDiaries;
     private OnLongClickListener<Diary> mOnLongClickListener;
+    private OnClickListener<Diary> mOnClickListener;
     public DiariesAdapter(List<Diary> diaries) {
         mDiaries = diaries;
     }
@@ -24,6 +25,10 @@ public class DiariesAdapter extends RecyclerView.Adapter<DiaryHolder> {
 
     public void setOnLongClickListener(OnLongClickListener<Diary> onLongClickListener) {
         this.mOnLongClickListener = onLongClickListener;
+    }
+
+    public void setOnClickListener(OnClickListener<Diary> onClickListener) {
+        this.mOnClickListener = onClickListener;
     }
 
     @NonNull
@@ -42,6 +47,14 @@ public class DiariesAdapter extends RecyclerView.Adapter<DiaryHolder> {
                 return mOnLongClickListener != null && mOnLongClickListener.onLongClick(view, diary);
             }
         });
+        holder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mOnClickListener != null) {
+                    mOnClickListener.onClick(view, diary);
+                }
+            }
+        });
     }
 
     @Override
@@ -51,6 +64,10 @@ public class DiariesAdapter extends RecyclerView.Adapter<DiaryHolder> {
 
     public interface OnLongClickListener<T> {
         boolean onLongClick(View v, T data);
+    }
+
+    public interface OnClickListener<T> {
+        void onClick(View v, T data);
     }
 
 

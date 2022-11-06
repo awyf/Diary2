@@ -29,7 +29,7 @@ public class DiariesFragment extends Fragment {
         inflater.inflate(R.menu.menu_write, menu);
     }
 
-    @Override
+   /* @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_add:
@@ -38,7 +38,7 @@ public class DiariesFragment extends Fragment {
         }
         return false;
     }
-
+*/
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

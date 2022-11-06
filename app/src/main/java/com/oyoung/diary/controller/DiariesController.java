@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.DialogInterface;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -43,11 +44,35 @@ public class DiariesController {
         mListAdapter.setOnLongClickListener(new DiariesAdapter.OnLongClickListener<Diary>() {
             @Override
             public boolean onLongClick(View v, Diary data) {
-                showInputDialog(data);
+                showDeleteDialog(data);
                 return false;
             }
         });
+        mListAdapter.setOnClickListener(new DiariesAdapter.OnClickListener<Diary>() {
+            @Override
+            public void onClick(View v, Diary data) {
+                showInputDialog(data);
+            }
+        });
     }
+
+    private void showDeleteDialog(Diary data) {
+        new AlertDialog.Builder(mView.getContext()).setMessage(EnApplication.get().getString(R.string.dialog_delete) + data.getTitle())
+                .setPositiveButton(EnApplication.get().getString(R.string.ok),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                mDiariesRepository.delete(data.getId());
+                                loadDiaries();
+                            }
+                        })
+                .setNegativeButton(EnApplication.get().getString(R.string.cancel), null).show();
+    }
+
+    private void showDetailDiary(final Diary diary) {
+
+    }
+
 
     private void showInputDialog(final Diary data) {
         final EditText editText = new EditText(mView.getContext());

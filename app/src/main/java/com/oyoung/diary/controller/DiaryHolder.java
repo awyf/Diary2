@@ -11,12 +11,17 @@ import com.oyoung.diary.model.Diary;
 
 public class DiaryHolder extends RecycleViewHolder<Diary>{
     private View.OnLongClickListener mOnLongClickListener;
+    private View.OnClickListener mOnClickListener;
     public DiaryHolder(@NonNull ViewGroup parent) {
         super(parent, R.layout.list_diary_item);
     }
     public void setOnLongClickListener(View.OnLongClickListener onLongClickListener) {
         this.mOnLongClickListener = onLongClickListener;
 
+    }
+
+    public void setOnClickListener(View.OnClickListener onClickListener) {
+        this.mOnClickListener = onClickListener;
     }
 
     @Override
@@ -30,6 +35,14 @@ public class DiaryHolder extends RecycleViewHolder<Diary>{
             @Override
             public boolean onLongClick(View view) {
                 return mOnLongClickListener != null && mOnLongClickListener.onLongClick(view);
+            }
+        });
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mOnClickListener != null) {
+                    mOnClickListener.onClick(view);
+                }
             }
         });
     }

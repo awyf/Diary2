@@ -32,7 +32,7 @@ public class AddDiaryController {
     }
 
     public void addDiaryToRepository(String title, String desc) {
-        if (title == null || desc == null) {
+        if (title.isEmpty() || desc.isEmpty()) {
             showMessage(EnApplication.get().getString(R.string.add_failed));
             return;
         }
@@ -48,6 +48,13 @@ public class AddDiaryController {
     public void closeWriteDiary(FragmentManager fragmentManager, Fragment fragment) {
         ActivityUtils.removeFragmentTOActivity(fragmentManager, fragment);
         ActivityUtils.addFragmentToActivity(fragmentManager, new DiariesFragment(), R.id.content);
+    }
+
+    public void setNavigationVisibility() {
+        View navigation_bottom = mView.getActivity().findViewById(R.id.navigation_bottom);
+        if (navigation_bottom.getVisibility() != View.VISIBLE) {
+            navigation_bottom.setVisibility(View.VISIBLE);
+        }
     }
 
     public void changeFocus(View view) {

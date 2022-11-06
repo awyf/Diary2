@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.oyoung.diary.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +22,12 @@ public class ActivityUtils {
     public static void removeFragmentTOActivity(FragmentManager manager, Fragment fragment) {
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.remove(fragment);
+        transaction.commit();
+    }
+
+    public static void replaceFragmentTOActivity(FragmentManager manager, Fragment fragment) {
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.content, fragment);
         transaction.commit();
     }
 }

@@ -12,4 +12,5 @@
     <string name="btn_ok">提交</string>
     <string name="add_success">更新成功</string>
     <string name="add_failed">更新失败</string>
+    <string name="dialog_delete">是否删除</string>
 </resources>
