@@ -24,10 +24,10 @@ public class DiariesFragment extends Fragment {
         mController = new DiariesController(this);
     }
 
-    @Override
+    /*@Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_write, menu);
-    }
+    }*/
 
    /* @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
