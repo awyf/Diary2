@@ -1,11 +1,9 @@
 package com.oyoung.diary.controller;
 
 import android.app.AlertDialog;
-import android.app.Application;
 import android.content.DialogInterface;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,7 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.oyoung.diary.EnApplication;
+import com.oyoung.diary.YyApplication;
 import com.oyoung.diary.R;
 import com.oyoung.diary.model.DataCallback;
 import com.oyoung.diary.model.DiariesRepository;
@@ -57,8 +55,8 @@ public class DiariesController {
     }
 
     private void showDeleteDialog(Diary data) {
-        new AlertDialog.Builder(mView.getContext()).setMessage(EnApplication.get().getString(R.string.dialog_delete) + data.getTitle())
-                .setPositiveButton(EnApplication.get().getString(R.string.ok),
+        new AlertDialog.Builder(mView.getContext()).setMessage(YyApplication.get().getString(R.string.dialog_delete) + data.getTitle())
+                .setPositiveButton(YyApplication.get().getString(R.string.ok),
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -66,7 +64,7 @@ public class DiariesController {
                                 loadDiaries();
                             }
                         })
-                .setNegativeButton(EnApplication.get().getString(R.string.cancel), null).show();
+                .setNegativeButton(YyApplication.get().getString(R.string.cancel), null).show();
     }
 
     private void showDetailDiary(final Diary diary) {
@@ -79,7 +77,7 @@ public class DiariesController {
         editText.setText(data.getDescription());
         new AlertDialog.Builder(mView.getContext()).setTitle(data.getTitle())
                 .setView(editText)
-                .setPositiveButton(EnApplication.get().getString(R.string.ok),
+                .setPositiveButton(YyApplication.get().getString(R.string.ok),
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -88,7 +86,7 @@ public class DiariesController {
                                 loadDiaries();
                             }
                         })
-                .setNegativeButton(EnApplication.get().getString(R.string.cancel), null).show();
+                .setNegativeButton(YyApplication.get().getString(R.string.cancel), null).show();
     }
 
     public void setDiariesList(RecyclerView recycleView) {
@@ -114,8 +112,8 @@ public class DiariesController {
 
     public void gotoWriteDiary(FragmentManager fragmentManager, Fragment fragment) {
         new AlertDialog.Builder(mView.getContext())
-                .setMessage(EnApplication.get().getString(R.string.alert))
-                .setPositiveButton(EnApplication.get().getString(R.string.ok),
+                .setMessage(YyApplication.get().getString(R.string.alert))
+                .setPositiveButton(YyApplication.get().getString(R.string.ok),
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -123,7 +121,7 @@ public class DiariesController {
                                 ActivityUtils.addFragmentToActivity(fragmentManager, new AddDiaryFragment(), R.id.content);
                             }
                         })
-                .setNegativeButton(EnApplication.get().getString(R.string.cancel), null).show();
+                .setNegativeButton(YyApplication.get().getString(R.string.cancel), null).show();
 
 //        showMessage(mView.getString(R.string.developing));
     }

@@ -4,17 +4,21 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.oyoung.diary.controller.MeController;
 import com.oyoung.diary.utils.ActivityUtils;
 import com.oyoung.diary.view.AddDiaryFragment;
 import com.oyoung.diary.view.DiariesFragment;
@@ -57,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initToolbar() {
+        //设置顶部状态栏为透明
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
@@ -64,15 +70,18 @@ public class MainActivity extends AppCompatActivity {
     private final BottomNavigationView.OnNavigationItemSelectedListener itemSelectedListener = item -> {
         switch (item.getItemId()) {
             case R.id.menu_diary:
+                MeController.setToolbarVisibility(this);
                 ActivityUtils.removeFragmentTOActivity(getSupportFragmentManager(), getSupportFragmentManager().findFragmentById(R.id.content));
                 ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), new DiariesFragment(), R.id.content);
                 break;
             case R.id.menu_me:
+                findViewById(R.id.toolbar).setVisibility(View.GONE);
                 ActivityUtils.removeFragmentTOActivity(getSupportFragmentManager(), getSupportFragmentManager().findFragmentById(R.id.content));
                 ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), new MeFragment(), R.id.content);
                 break;
             case R.id.menu_new:
                 bottomNavigationView.setVisibility(View.GONE);
+                MeController.setToolbarVisibility(this);
                 ActivityUtils.removeFragmentTOActivity(getSupportFragmentManager(), getSupportFragmentManager().findFragmentById(R.id.content));
                 ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), new AddDiaryFragment(), R.id.content);
                 break;

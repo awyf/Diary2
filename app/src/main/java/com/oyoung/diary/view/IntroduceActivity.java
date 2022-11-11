@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -35,7 +36,7 @@ public class IntroduceActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(IntroduceActivity.this, LoginActivity.class));
+                startActivity(new Intent(IntroduceActivity.this, LoginDirectActivity.class));
                 IntroduceActivity.this.finish();
             }
         });
@@ -48,6 +49,8 @@ public class IntroduceActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        //设置顶部状态栏为透明
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         ImageView imageView;
         viewPager = findViewById(R.id.introduce_viewPager);
         viewList = new ArrayList<>();

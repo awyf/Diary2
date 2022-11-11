@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,7 +19,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText edit_input_text;
     private EditText edit_input_text_again;
     private Button btn_comeIn;
-    private Button btn_goto_psw;
     private static final String TAG = "LoginMainActivity";
 
     @Override
@@ -29,12 +29,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void bindView() {
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         edit_input_text = findViewById(R.id.edit_input_text);
         edit_input_text_again = findViewById(R.id.edit_input_text_again);
         btn_comeIn = findViewById(R.id.btn_comeIn);
         btn_comeIn.setOnClickListener(this);
-        btn_goto_psw = findViewById(R.id.btn_goto_psw);
-        btn_goto_psw.setOnClickListener(this);
     }
 
     @Override
@@ -60,10 +59,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             }
-
-        } else if (v.getId() == R.id.btn_goto_psw) {
-            Intent intent = new Intent(this, LoginDirectActivity.class);
-            startActivity(intent);
         }
     }
 

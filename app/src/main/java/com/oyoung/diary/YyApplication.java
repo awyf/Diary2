@@ -4,8 +4,8 @@ import android.app.Application;
 
 import com.oyoung.diary.utils.GlideUtils;
 
-public class EnApplication extends Application {
-    private static EnApplication INSTANCE;
+public class YyApplication extends Application {
+    private static YyApplication INSTANCE;
 
     @Override
     public void onCreate() {
@@ -14,7 +14,7 @@ public class EnApplication extends Application {
         INSTANCE = this;
     }
 
-    public static EnApplication get() {
+    public static YyApplication get() {
         return INSTANCE;
     }
 }

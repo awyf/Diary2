@@ -1,4 +1,4 @@
-package com.oyoung.diary.view;
+ package com.oyoung.diary.view;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.WindowManager;
 
 import com.oyoung.diary.R;
 import com.oyoung.diary.utils.GlideUtils;
@@ -23,7 +24,7 @@ public class StartActivity extends AppCompatActivity {
         public void handleMessage(@NonNull Message msg) {
             switch (msg.what) {
                 case GO_LOGIN:
-                    Intent login_intent = new Intent(StartActivity.this, LoginActivity.class);
+                    Intent login_intent = new Intent(StartActivity.this, LoginDirectActivity.class);
                     startActivity(login_intent);
                     StartActivity.this.finish();
                     break;
@@ -40,15 +41,16 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         SharedPreferences sp = getSharedPreferences("Start", MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         boolean isFirst = sp.getBoolean("isFirst", true);
         if (isFirst) {
-            mHandler.sendEmptyMessage(0);
+            mHandler.sendEmptyMessageDelayed(0, 2000);
             editor.putBoolean("isFirst", false);
             editor.apply();
         } else {
-            mHandler.sendEmptyMessage(1);
+            mHandler.sendEmptyMessageDelayed(1, 2000);
         }
     }
 }

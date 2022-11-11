@@ -1,6 +1,7 @@
 package com.oyoung.diary.utils;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.widget.ImageView;
@@ -12,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.target.ImageViewTarget;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
@@ -79,6 +81,36 @@ public class GlideUtils {
     public static void loadImage(String url, ImageView imageView) {
         Glide.with(context).load(url).into(imageView);
     }
+
+    public interface GlideLoadBitmapCallback{
+        void getBitmapCallback(Bitmap bitmap);
+    }
+
+    public static void getBitmap(Context context, String uri, final GlideLoadBitmapCallback callback) {
+        loadingDialog = new LoadingDialog(context, R.layout.loading_dialog, null);
+        Glide.with(context).asBitmap().load(uri).centerCrop()
+                .override(200, 200)
+                .into(new CustomTarget<Bitmap>() {
+                    @Override
+                    public void onLoadStarted(@Nullable Drawable placeholder) {
+                        super.onLoadStarted(placeholder);
+                        if (loadingDialog != null) {
+                            loadingDialog.show();
+                        }
+                    }
+
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        if (loadingDialog != null) {
+                            loadingDialog.dismiss();
+                        }
+                        callback.getBitmapCallback(resource);
+                    }
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {}
+                });
+    }
+
 
     /**
      * 显示网络Url图片 附带加载网络监听和设置监听资源

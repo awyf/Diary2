@@ -5,13 +5,13 @@ import android.content.SharedPreferences;
 
 import androidx.collection.SimpleArrayMap;
 
-import com.oyoung.diary.EnApplication;
+import com.oyoung.diary.YyApplication;
 
 public final class SharedPreferencesUtils {
     private static final SimpleArrayMap<String, SharedPreferencesUtils> mCaches = new SimpleArrayMap<>();
     private SharedPreferences mSharedPreferences;
     private SharedPreferencesUtils(final String spName, final int mode) {
-        mSharedPreferences = EnApplication.get().getSharedPreferences(spName, mode);
+        mSharedPreferences = YyApplication.get().getSharedPreferences(spName, mode);
     }
 
     public static SharedPreferencesUtils getInstance(String spName) {
