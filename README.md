@@ -1,7 +1,7 @@
 # TestProject
 1.引言
 1.1软件说明
-	使用Android Studio开发一款学生日记APP。其功能拥有：添加、删除、修改学生日记，查询个人密码，更改头像，更新美图等。
+	使用Android Studio开发一款日记APP。其功能拥有：添加、删除、修改学生日记，查询个人密码，更改头像，更新美图等。
 2. 总体设计
 2.1设计思路
 	主界面包含底部导航栏和顶部导航栏，中间为fragment。底部导航栏分为三个模块：日记、添加记录、我的。顶部导航栏显示APP名称。日记列表、添加日记以及我的都使用fragment作为界面的显示。Fragment在MainActivity显示。通过底部导航栏的选择去切换fragment的显示。
@@ -22,7 +22,7 @@
 3.系统结构
 3.1总体架构
 
-com.oyoung.diary为主包，分为四个包controller、model、utils、view。
+com.example.diary为主包，分为四个包controller、model、utils、view。
 controller中
 
 AddDiaryController是添加日记的逻辑控制代码
@@ -51,7 +51,7 @@ StartActivity是启动APP的功能页面：包括初始化一些工具类和启�
 
 
 MainActivity是应用主界面
-YyApplication是应用类（可不管）
+diaryApplication是应用类（可不管）
 3.2使用说明
 1.流程：输入密码直接进入日记APP的主页，若没有密码，选择设置密码，设置成功后即可进入主界面进行操作。
 2.首次打开APP，将显示三张引导页。非首次打开APP，只显示启动页并到达输入密码界面。
