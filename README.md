@@ -1,1 +1,58 @@
 # TestProject
+1.引言
+1.1软件说明
+	使用Android Studio开发一款学生日记APP。其功能拥有：添加、删除、修改学生日记，查询个人密码，更改头像，更新美图等。
+2. 总体设计
+2.1设计思路
+	主界面包含底部导航栏和顶部导航栏，中间为fragment。底部导航栏分为三个模块：日记、添加记录、我的。顶部导航栏显示APP名称。日记列表、添加日记以及我的都使用fragment作为界面的显示。Fragment在MainActivity显示。通过底部导航栏的选择去切换fragment的显示。
+2.2运行环境
+	Android studio、Jdk11
+
+2.3实现方式
+用什么控件实现什么功能
+1.viewpager2实现了引导页切换功能
+2.日记模块中recycleview实现日记列表显示功能
+3.主界面bottomNavigation实现了底部导航栏功能
+4.主界面toolBar实现了顶部导航栏功能
+5.我的模块中ImageView实现更新今日美图的显示
+6.我的模块中Textview实现点击更新美图
+7.我的模块中小眼睛实现密码的显示和隐藏
+8.我的模块中ImageBotton实现头像通过相册和拍照切换功能
+
+3.系统结构
+3.1总体架构
+
+com.oyoung.diary为主包，分为四个包controller、model、utils、view。
+controller中
+
+AddDiaryController是添加日记的逻辑控制代码
+DiariesController是日记列表的逻辑控制代码
+MeControoler是我的模块的逻辑控制代码
+RecycleViewHolder是日记列表中recycleview的数据保存类
+IntroduceAdapter是引导页中viewpager的adapter
+DiariesAdapter是日记列表中recycleview的adapter
+model中
+
+Diary是日记的实体类
+DiaryHelper是日记的数据库类，包含对日记的增加、删除、更改，Sqlite的运用
+utils中包含整个项目需要使用的封装好的工具类
+
+view中包含整个项目的view
+
+AddDiaryFragment是添加日记的功能界面
+DiariesFragment是日记列表的功能界面
+IntroduceActivity是引导页的功能页面
+LoadingDialog是加载的功能页面（可不管）
+LoginActivity是设置密码的功能界面
+LoginDirectActivity是登录密码的功能界面
+MeFragment是我的模块的功能页面
+SelectPicPopupWindow是底部弹窗的功能页面（可不管）
+StartActivity是启动APP的功能页面：包括初始化一些工具类和启动页的显示
+
+
+MainActivity是应用主界面
+YyApplication是应用类（可不管）
+3.2使用说明
+1.流程：输入密码直接进入日记APP的主页，若没有密码，选择设置密码，设置成功后即可进入主界面进行操作。
+2.首次打开APP，将显示三张引导页。非首次打开APP，只显示启动页并到达输入密码界面。
+3.底部导航栏包括：日记列表，新增日记，我的。新增日记后，日记将显示在日记列表中，长按日记列表中的子项可弹出删除窗口，点击日记列表的子类可弹出修改窗口。我的主页中，可以点击密码右侧显示密码和隐藏密码。点击更新今日美图可更新图片。点击头像可以选择切换头像。
