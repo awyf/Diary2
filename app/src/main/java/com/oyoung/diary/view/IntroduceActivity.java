@@ -51,7 +51,6 @@ public class IntroduceActivity extends AppCompatActivity {
     private void initView() {
         //设置顶部状态栏为透明
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        ImageView imageView;
         viewPager = findViewById(R.id.introduce_viewPager);
         viewList = new ArrayList<>();
         viewList.add(getView(R.layout.introduce_a));

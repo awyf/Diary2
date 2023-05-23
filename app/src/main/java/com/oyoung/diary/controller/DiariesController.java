@@ -16,9 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.oyoung.diary.YyApplication;
 import com.oyoung.diary.R;
-import com.oyoung.diary.model.DataCallback;
-import com.oyoung.diary.model.DiariesRepository;
 import com.oyoung.diary.model.Diary;
+import com.oyoung.diary.model.DiaryHelper;
 import com.oyoung.diary.utils.ActivityUtils;
 import com.oyoung.diary.view.AddDiaryFragment;
 import com.oyoung.diary.view.DiariesFragment;
@@ -26,12 +25,15 @@ import com.oyoung.diary.view.DiariesFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.oyoung.diary.utils.OnClick;
+import com.oyoung.diary.utils.Util;
+
 public class DiariesController {
     private Fragment mView;
     private DiariesAdapter mListAdapter;
-    private DiariesRepository mDiariesRepository;
+    private DiaryHelper diaryHelper;
     public DiariesController(@NonNull DiariesFragment diariesFragment) {
-        mDiariesRepository = DiariesRepository.getInstance();
+        diaryHelper = DiaryHelper.getInstance(YyApplication.get());
         mView = diariesFragment;
         mView.setHasOptionsMenu(true);
         initAdapter();
@@ -60,7 +62,7 @@ public class DiariesController {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                mDiariesRepository.delete(data.getId());
+                                diaryHelper.delete(data.getId());
                                 loadDiaries();
                             }
                         })
@@ -81,8 +83,7 @@ public class DiariesController {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                data.setDescription(editText.getText().toString());
-                                mDiariesRepository.update(data);
+                                diaryHelper.modify(data.getId(), "", editText.getText().toString());
                                 loadDiaries();
                             }
                         })
@@ -97,17 +98,7 @@ public class DiariesController {
     }
 
     public void loadDiaries() {
-        mDiariesRepository.getAll(new DataCallback<List<Diary>>() {
-            @Override
-            public void onSuccess(List<Diary> diaryList) {
-                processDiaries(diaryList);
-            }
-
-            @Override
-            public void onError() {
-                showError();
-            }
-        });
+        processDiaries(diaryHelper.query());
     }
 
     public void gotoWriteDiary(FragmentManager fragmentManager, Fragment fragment) {
@@ -123,7 +114,6 @@ public class DiariesController {
                         })
                 .setNegativeButton(YyApplication.get().getString(R.string.cancel), null).show();
 
-//        showMessage(mView.getString(R.string.developing));
     }
 
     private void showError() {

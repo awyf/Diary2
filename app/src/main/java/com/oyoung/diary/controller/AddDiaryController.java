@@ -11,19 +11,18 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.oyoung.diary.YyApplication;
 import com.oyoung.diary.R;
-import com.oyoung.diary.model.DiariesRepository;
-import com.oyoung.diary.model.Diary;
+import com.oyoung.diary.model.DiaryHelper;
 import com.oyoung.diary.utils.ActivityUtils;
 import com.oyoung.diary.view.AddDiaryFragment;
 import com.oyoung.diary.view.DiariesFragment;
 
 public class AddDiaryController {
     private Fragment mView;
-    private DiariesRepository mDiariesRepository;
     private static final String TAG = "AddDiaryController";
+    private DiaryHelper diaryHelper;
 
     public AddDiaryController(@NonNull AddDiaryFragment addDiaryFragment) {
-        mDiariesRepository = DiariesRepository.getInstance();
+        diaryHelper = DiaryHelper.getInstance(YyApplication.get());
         mView = addDiaryFragment;
         mView.setHasOptionsMenu(true);
     }
@@ -33,8 +32,7 @@ public class AddDiaryController {
             showMessage(YyApplication.get().getString(R.string.add_failed));
             return;
         }
-        Diary diary = new Diary(title, desc);
-        mDiariesRepository.update(diary);
+        diaryHelper.insert(title, desc);
         showMessage(YyApplication.get().getString(R.string.add_success));
     }
 

@@ -1,5 +1,5 @@
 package com.oyoung.diary.view;
-
+//
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,21 +24,6 @@ public class DiariesFragment extends Fragment {
         mController = new DiariesController(this);
     }
 
-    /*@Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_write, menu);
-    }*/
-
-   /* @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_add:
-                mController.gotoWriteDiary(getActivity().getSupportFragmentManager(), this);
-                return true;
-        }
-        return false;
-    }
-*/
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,4 +37,8 @@ public class DiariesFragment extends Fragment {
         super.onResume();
         mController.loadDiaries();
     }
+
 }
+
+
+

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import androidx.core.view.ViewCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.oyoung.diary.controller.MeController;
+import com.oyoung.diary.model.DiaryHelper;
 import com.oyoung.diary.utils.ActivityUtils;
 import com.oyoung.diary.view.AddDiaryFragment;
 import com.oyoung.diary.view.DiariesFragment;
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         initToolbar();
         initFragment();
         initNavigationBottom();

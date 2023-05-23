@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,10 +25,13 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.oyoung.diary.YyApplication;
 import com.oyoung.diary.R;
 import com.oyoung.diary.controller.MeController;
+import com.oyoung.diary.controller.UserAdapter;
 import com.oyoung.diary.utils.BitmapUtils;
 import com.oyoung.diary.utils.FileUtils;
 import com.oyoung.diary.utils.GlideUtils;
+import com.oyoung.diary.utils.OnClick;
 import com.oyoung.diary.utils.PermissionUtils;
+import com.oyoung.diary.utils.Util;
 
 import java.io.File;
 import static android.app.Activity.RESULT_OK;
@@ -42,6 +47,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     private String imaUrl = "http://pic2.zhimg.com/v2-696b347aa5b02a943706d5de13dc6ec1_r.jpg";
     private MeController meController;
     private boolean isShow = true;
+    View tv_helpPhone;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +70,8 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         tv_setting.setOnClickListener(this);
         tv_password = root.findViewById(R.id.tv_password);
         shapeableImageView = root.findViewById(R.id.iv_avatar);
+        tv_helpPhone=root.findViewById(R.id.tv_helpPhone);
+        tv_helpPhone.setOnClickListener(this);
         shapeableImageView.setOnClickListener(this);
         initAvatarView();
         setTouch();
@@ -104,6 +112,18 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.tv_helpPhone:{
+                Util.showAlert(getActivity(), "拔打电话 400 600 000 ？", new OnClick() {
+                    @Override
+                    public void onDo() {
+                        Intent intent = new Intent(Intent.ACTION_CALL);
+                        Uri data = Uri.parse("tel:" + "400 600 000");
+                        intent.setData(data);
+                        startActivity(intent);
+                    }
+                });
+                break;
+            }
             case R.id.tv_update:
                 GlideUtils.getBitmap(getActivity(), imaUrl, new GlideUtils.GlideLoadBitmapCallback() {
                     @Override
@@ -113,7 +133,13 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                 });
                 break;
             case R.id.tv_setting:
-                meController.toSelfSetting(getActivity());
+                Util.showAlert(getActivity(), "前往设置页？", new OnClick() {
+                    @Override
+                    public void onDo() {
+                        meController.toSelfSetting(getActivity());
+                    }
+                });
+
                 break;
             case R.id.iv_avatar:
                 PermissionUtils.checkPermission(getActivity());

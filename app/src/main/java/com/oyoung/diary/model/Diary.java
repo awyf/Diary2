@@ -1,19 +1,17 @@
 package com.oyoung.diary.model;
 
-import java.util.UUID;
-
 public class Diary {
-    private String id;
+    private int id;
     private String title;
     private String description;
 
-    public Diary(String title, String description) {
-        this.id = UUID.randomUUID().toString();
+    public Diary(int id, String title, String description) {
+        this.id = id;
         this.title = title;
         this.description = description;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -34,4 +32,7 @@ public class Diary {
     }
 
 
+    public void setId(int id) {
+        this.id = id;
+    }
 }
