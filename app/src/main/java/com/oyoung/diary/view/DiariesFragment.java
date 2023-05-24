@@ -1,5 +1,5 @@
 package com.oyoung.diary.view;
-//
+///
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
